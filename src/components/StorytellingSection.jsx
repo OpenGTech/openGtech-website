@@ -37,37 +37,37 @@ export default function StorytellingSection() {
       duration: 2,
       ease: 'power2.out'
     })
-    // Fade out text 1, move up slightly
-    .to(text1Ref.current, {
-      opacity: 0,
-      y: -100,
-      duration: 1,
-      ease: 'power2.inOut'
-    }, "+=0.5")
-    // Animate text 2 (Slide up and fade in)
-    .to(text2Ref.current, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 1.5,
-      ease: 'power3.out'
-    }, "<0.5")
-    // Fade out text 2
-    .to(text2Ref.current, {
-      opacity: 0,
-      y: -100,
-      duration: 1,
-      ease: 'power2.inOut'
-    }, "+=0.5")
-    // Animate text 3 (Epic conclusion zoom in)
-    .to(text3Ref.current, {
-      opacity: 1,
-      scale: 1,
-      duration: 2,
-      ease: 'elastic.out(1, 0.7)'
-    }, "<0.5")
-    // Hold it at the end to let the user read it
-    .to({}, {duration: 1.5});
+      // Fade out text 1, move up slightly
+      .to(text1Ref.current, {
+        opacity: 0,
+        y: -100,
+        duration: 1,
+        ease: 'power2.inOut'
+      }, "+=0.5")
+      // Animate text 2 (Slide up and fade in)
+      .to(text2Ref.current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.5,
+        ease: 'power3.out'
+      }, "<0.5")
+      // Fade out text 2
+      .to(text2Ref.current, {
+        opacity: 0,
+        y: -100,
+        duration: 1,
+        ease: 'power2.inOut'
+      }, "+=0.5")
+      // Animate text 3 (Epic conclusion zoom in)
+      .to(text3Ref.current, {
+        opacity: 1,
+        scale: 1,
+        duration: 2,
+        ease: 'elastic.out(1, 0.7)'
+      }, "<0.5")
+      // Hold it at the end to let the user read it
+      .to({}, { duration: 1.5 });
 
   }, { scope: containerRef });
 
@@ -104,10 +104,10 @@ export default function StorytellingSection() {
           margin: '0 auto',
           willChange: 'transform, opacity'
         }}>
-          We provide the <br/>
+          We provide the <br />
           <span className="gradient-text">technical muscle</span>
         </h2>
-        
+
         <h2 ref={text2Ref} style={{
           position: 'absolute',
           fontSize: 'clamp(2.5rem, 6vw, 6rem)',
@@ -119,9 +119,9 @@ export default function StorytellingSection() {
           margin: '0 auto',
           willChange: 'transform, opacity'
         }}>
-          to turn your <br/> business goals
+          to turn your <br /> business goals
         </h2>
-        
+
         <h2 ref={text3Ref} style={{
           position: 'absolute',
           fontSize: 'clamp(4rem, 10vw, 12rem)',
@@ -132,11 +132,11 @@ export default function StorytellingSection() {
           margin: '0 auto',
           willChange: 'transform, opacity'
         }}>
-          Into <br/>
-          <span style={{ 
-            background: 'linear-gradient(90deg, #00ff87, #60efff)', 
-            WebkitBackgroundClip: 'text', 
-            color: 'transparent' 
+          Into <br />
+          <span style={{
+            background: 'linear-gradient(90deg, #00ff87, #60efff)',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent'
           }}>Reality.</span>
         </h2>
       </div>

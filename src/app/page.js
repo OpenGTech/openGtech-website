@@ -2,7 +2,8 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import FoundersJourney from '@/components/FoundersJourney';
 import StorytellingSection from '@/components/StorytellingSection';
-import ServicesGrid from '@/components/ServicesGrid';
+import ServicesSection from '@/components/ServicesSection';
+import HowWeShip from '@/components/HowWeShip';
 import LocalBusiness from '@/components/LocalBusiness';
 import ProductsShowcase from '@/components/ProductsShowcase';
 import Footer from '@/components/Footer';
@@ -14,7 +15,8 @@ export default function Home() {
       <HeroSection />
       <FoundersJourney />
       <StorytellingSection />
-      <ServicesGrid />
+      <HowWeShip />
+      <ServicesSection />
       <LocalBusiness />
       <ProductsShowcase />
       <Footer />
