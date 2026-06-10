@@ -33,14 +33,48 @@ const services = [
   }
 ];
 
+// Simple Static Typography Section
+const IntroTypography = () => {
+  return (
+    <div style={{ height: '40vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#050505' }}>
+      <div style={{ textAlign: 'center' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p style={{ 
+            color: 'var(--accent-color)', 
+            fontWeight: 600, 
+            letterSpacing: '2px', 
+            textTransform: 'uppercase', 
+            marginBottom: '1rem', 
+            fontSize: '0.9rem' 
+          }}>
+            The Craft
+          </p>
+          <h2 style={{ 
+            fontSize: 'clamp(3.5rem, 6vw, 5rem)', 
+            fontWeight: 800, 
+            lineHeight: 1.1, 
+            letterSpacing: '-0.04em',
+            margin: 0,
+            color: 'var(--text-secondary)'
+          }}>
+            What we <span style={{ color: '#ffffff' }}>master.</span>
+          </h2>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+// Individual Sticky Card
 const Card = ({ service, index, progress, range, targetScale }) => {
   const containerRef = useRef(null);
   
-  // Smoothly scale down and fade out the card as the next one scrolls over it
   const scale = useTransform(progress, range, [1, targetScale]);
-  // We keep opacity solid to avoid any glass/transparent feel when stacking
   
-  // Interactive Mouse Spotlight
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -72,12 +106,12 @@ const Card = ({ service, index, progress, range, targetScale }) => {
         onMouseLeave={() => setIsHovered(false)}
         style={{
           scale,
-          top: `calc(5vh + ${index * 25}px)`, // Adjusted top offset so it doesn't clip
+          top: `calc(5vh + ${index * 25}px)`, 
           position: 'relative',
           width: '100%',
-          maxWidth: '1100px', // Slightly narrower
-          height: '450px', // Decreased height from 600px to 450px
-          maxHeight: '75vh', // Ensure it never exceeds viewport height
+          maxWidth: '1100px',
+          height: '450px',
+          maxHeight: '75vh',
           background: service.bg,
           borderRadius: '24px',
           border: '1px solid #333333',
@@ -86,11 +120,10 @@ const Card = ({ service, index, progress, range, targetScale }) => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '3rem', // Reduced padding from 4rem
+          padding: '3rem',
           transformOrigin: 'top center'
         }}
       >
-        {/* Dynamic Flashlight Effect */}
         <motion.div 
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
@@ -106,14 +139,12 @@ const Card = ({ service, index, progress, range, targetScale }) => {
           }}
         />
 
-        {/* Top Content: Title */}
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'flex-start' }}>
           <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, margin: 0, letterSpacing: '-0.02em', color: '#fff', width: '100%', lineHeight: 1.1 }}>
             {service.title}
           </h2>
         </div>
 
-        {/* Bottom Content: Tags and Description */}
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', width: '100%' }}>
           <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', width: '45%' }}>
             {service.tags.map(tag => (
@@ -142,54 +173,40 @@ const Card = ({ service, index, progress, range, targetScale }) => {
   );
 };
 
-export default function ServicesSection() {
+// Container for the sticky cards
+const CardsStack = () => {
   const containerRef = useRef(null);
   
+  // Track scroll progress exclusively within the cards section
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end']
   });
 
   return (
-    <section ref={containerRef} id="services" style={{ position: 'relative', background: '#050505', paddingBottom: '20vh' }}>
-      
-      <div style={{ height: '40vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-         <div style={{ textAlign: 'center' }}>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ color: 'var(--accent-color)', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '1rem' }}
-            >
-              // Execution
-            </motion.p>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              style={{ fontSize: 'clamp(3rem, 6vw, 4.5rem)', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', margin: 0 }}
-            >
-              What we actually do.
-            </motion.h2>
-         </div>
-      </div>
+    <div ref={containerRef} style={{ position: 'relative', background: '#050505', paddingBottom: '20vh' }}>
+      {services.map((service, index) => {
+        const targetScale = 1 - ((services.length - 1 - index) * 0.05);
+        return (
+          <Card 
+            key={index} 
+            index={index} 
+            service={service} 
+            progress={scrollYProgress} 
+            range={[index * 0.25, 1]} 
+            targetScale={targetScale} 
+          />
+        );
+      })}
+    </div>
+  );
+};
 
-      <div style={{ position: 'relative' }}>
-        {services.map((service, index) => {
-          const targetScale = 1 - ((services.length - 1 - index) * 0.05);
-          return (
-            <Card 
-              key={index} 
-              index={index} 
-              service={service} 
-              progress={scrollYProgress} 
-              range={[index * 0.25, 1]} 
-              targetScale={targetScale} 
-            />
-          );
-        })}
-      </div>
+export default function ServicesSection() {
+  return (
+    <section id="services" style={{ background: '#000' }}>
+      <IntroTypography />
+      <CardsStack />
     </section>
   );
 }
