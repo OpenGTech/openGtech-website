@@ -4,32 +4,41 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const services = [
   {
-    title: 'Digital Engineering',
-    description: 'We architect and build full-stack web and mobile applications using the latest technologies. React, Next.js, Node.js—we write clean, scalable code that performs flawlessly under heavy load.',
-    color: '#00d2ff',
-    bg: '#111111',
-    tags: ['Web Apps', 'Mobile', 'Architecture', 'Scale']
+    title: 'Launch Fast',
+    description: 'From idea to live product in weeks, not months. We build beautiful MVPs that help founders validate, pitch investors, and get their first users.',
+    color: '#3B82F6',
+    bg: '#0B1220',
+    tags: ['MVPs', 'Web Apps', 'Mobile', 'Launch']
   },
   {
-    title: 'AI Solutions & RAG',
-    description: 'We don\'t just plug into ChatGPT. We build secure, custom LLM agents and RAG (Retrieval-Augmented Generation) pipelines that act as autonomous experts trained entirely on your company\'s proprietary data.',
-    color: '#ff007f',
-    bg: '#151515',
-    tags: ['Agents', 'LLMs', 'RAG', 'Automation']
+    title: 'AI That Actually Works',
+    description: 'Custom AI agents, RAG pipelines, and intelligent workflows built around your business—not generic ChatGPT wrappers.',
+    color: '#EC4899',
+    bg: '#1A0D18',
+    tags: ['AI Agents', 'RAG', 'LLMs', 'Automation']
   },
   {
-    title: 'Business Automation',
-    description: 'Stop doing manual data entry. We connect your disjointed SaaS tools, build custom internal dashboards, and write complex automation scripts so your operations run completely hands-free.',
-    color: '#8e2de2',
-    bg: '#1a1a1a',
-    tags: ['APIs', 'CRMs', 'Workflows', 'Scripts']
+    title: 'Automate Everything',
+    description: 'Kill repetitive work. We connect tools, automate operations, and build systems that scale while you sleep.',
+    color: '#8B5CF6',
+    bg: '#120E1F',
+    tags: ['Automation', 'APIs', 'Workflows', 'Internal Tools']
   },
+
   {
-    title: 'Growth & Local SEO',
-    description: 'We turn your digital storefront into a lead-generation machine. High-conversion landing pages, integrated booking systems, and aggressive local SEO strategies that put you at the top of search.',
-    color: '#00ff87',
-    bg: '#1f1f1f',
-    tags: ['SEO', 'Funnels', 'Conversion', 'Leads']
+    title: 'Growth Loops',
+    description: 'Landing pages, analytics, SEO, experiments, and conversion systems designed to turn visitors into customers.',
+    color: '#22C55E',
+    bg: '#0D1A12',
+    tags: ['SEO', 'Funnels', 'Analytics', 'Growth']
+  },
+
+  {
+    title: 'Build the Future',
+    description: 'IoT, hardware prototypes, PCB design, firmware, and rapid physical product development for ambitious founders.',
+    color: '#05CBFC',
+    bg: '#1e272aff',
+    tags: ['IoT', 'Hardware', 'PCB', 'Firmware']
   }
 ];
 
@@ -43,20 +52,20 @@ const IntroTypography = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p style={{ 
-            color: 'var(--accent-color)', 
-            fontWeight: 600, 
-            letterSpacing: '2px', 
-            textTransform: 'uppercase', 
-            marginBottom: '1rem', 
-            fontSize: '0.9rem' 
+          <p style={{
+            color: 'var(--accent-color)',
+            fontWeight: 600,
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            marginBottom: '1rem',
+            fontSize: '0.9rem'
           }}>
             The Craft
           </p>
-          <h2 style={{ 
-            fontSize: 'clamp(3.5rem, 6vw, 5rem)', 
-            fontWeight: 800, 
-            lineHeight: 1.1, 
+          <h2 style={{
+            fontSize: 'clamp(3.5rem, 6vw, 5rem)',
+            fontWeight: 800,
+            lineHeight: 1.1,
             letterSpacing: '-0.04em',
             margin: 0,
             color: 'var(--text-secondary)'
@@ -72,9 +81,9 @@ const IntroTypography = () => {
 // Individual Sticky Card
 const Card = ({ service, index, progress, range, targetScale }) => {
   const containerRef = useRef(null);
-  
+
   const scale = useTransform(progress, range, [1, targetScale]);
-  
+
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -88,7 +97,7 @@ const Card = ({ service, index, progress, range, targetScale }) => {
   };
 
   return (
-    <div 
+    <div
       style={{
         position: 'sticky',
         top: 0,
@@ -99,14 +108,14 @@ const Card = ({ service, index, progress, range, targetScale }) => {
         padding: '0 1rem'
       }}
     >
-      <motion.div 
+      <motion.div
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{
           scale,
-          top: `calc(5vh + ${index * 25}px)`, 
+          top: `calc(5vh + ${index * 25}px)`,
           position: 'relative',
           width: '100%',
           maxWidth: '1100px',
@@ -124,7 +133,7 @@ const Card = ({ service, index, progress, range, targetScale }) => {
           transformOrigin: 'top center'
         }}
       >
-        <motion.div 
+        <motion.div
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
           style={{
@@ -163,7 +172,7 @@ const Card = ({ service, index, progress, range, targetScale }) => {
               </span>
             ))}
           </div>
-          
+
           <p style={{ color: '#cccccc', fontSize: '1.1rem', lineHeight: 1.6, width: '50%', margin: 0, fontWeight: 500 }}>
             {service.description}
           </p>
@@ -176,7 +185,7 @@ const Card = ({ service, index, progress, range, targetScale }) => {
 // Container for the sticky cards
 const CardsStack = () => {
   const containerRef = useRef(null);
-  
+
   // Track scroll progress exclusively within the cards section
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -188,13 +197,13 @@ const CardsStack = () => {
       {services.map((service, index) => {
         const targetScale = 1 - ((services.length - 1 - index) * 0.05);
         return (
-          <Card 
-            key={index} 
-            index={index} 
-            service={service} 
-            progress={scrollYProgress} 
-            range={[index * 0.25, 1]} 
-            targetScale={targetScale} 
+          <Card
+            key={index}
+            index={index}
+            service={service}
+            progress={scrollYProgress}
+            range={[index * 0.25, 1]}
+            targetScale={targetScale}
           />
         );
       })}
