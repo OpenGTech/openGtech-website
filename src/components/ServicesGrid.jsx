@@ -30,9 +30,6 @@ export default function ServicesGrid() {
       <div className="container">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Our Core <span className="gradient-text">Expertise</span></h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', textAlign: 'center', maxWidth: '600px' }}>
-            We provide the technical muscle to turn your business goals into reality.
-          </p>
         </div>
 
         <div style={{

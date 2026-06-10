@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import FoundersJourney from '@/components/FoundersJourney';
+import StorytellingSection from '@/components/StorytellingSection';
 import ServicesGrid from '@/components/ServicesGrid';
 import LocalBusiness from '@/components/LocalBusiness';
 import ProductsShowcase from '@/components/ProductsShowcase';
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <FoundersJourney />
+      <StorytellingSection />
       <ServicesGrid />
       <LocalBusiness />
       <ProductsShowcase />
