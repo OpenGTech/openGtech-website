@@ -6,11 +6,13 @@ export const metadata = {
 };
 
 import SmoothScrolling from '../components/SmoothScrolling';
+import PageLoader from '../components/PageLoader';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <PageLoader />
         <SmoothScrolling>
           {children}
         </SmoothScrolling>
