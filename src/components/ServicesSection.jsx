@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const services = [
@@ -86,6 +86,7 @@ const Card = ({ service, index, progress, range, targetScale }) => {
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return;
@@ -96,16 +97,24 @@ const Card = ({ service, index, progress, range, targetScale }) => {
     });
   };
 
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
     <div
       style={{
         position: 'sticky',
         top: 0,
-        height: '100vh',
+        height: isMobile ? 'auto' : '100vh',
+        minHeight: isMobile ? '100vh' : undefined,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '0 1rem'
+        padding: isMobile ? '0 0.75rem' : '0 1rem'
       }}
     >
       <motion.div
@@ -119,17 +128,18 @@ const Card = ({ service, index, progress, range, targetScale }) => {
           position: 'relative',
           width: '100%',
           maxWidth: '1100px',
-          height: '450px',
-          maxHeight: '75vh',
+          height: isMobile ? 'auto' : '450px',
+          minHeight: isMobile ? '380px' : undefined,
+          maxHeight: isMobile ? '85vh' : '75vh',
           background: service.bg,
-          borderRadius: '24px',
+          borderRadius: isMobile ? '16px' : '24px',
           border: '1px solid #333333',
           overflow: 'hidden',
           boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '3rem',
+          padding: isMobile ? '1.75rem 1.25rem' : '3rem',
           transformOrigin: 'top center'
         }}
       >
@@ -149,20 +159,42 @@ const Card = ({ service, index, progress, range, targetScale }) => {
         />
 
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'flex-start' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, margin: 0, letterSpacing: '-0.02em', color: '#fff', width: '100%', lineHeight: 1.1 }}>
+          <h2 style={{
+            fontSize: isMobile ? 'clamp(1.75rem, 7vw, 2.5rem)' : 'clamp(2.5rem, 5vw, 3.5rem)',
+            fontWeight: 800,
+            margin: 0,
+            letterSpacing: '-0.02em',
+            color: '#fff',
+            width: '100%',
+            lineHeight: 1.1
+          }}>
             {service.title}
           </h2>
         </div>
 
-        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', width: '100%' }}>
-          <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', width: '45%' }}>
+        <div style={{
+          position: 'relative',
+          zIndex: 1,
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          justifyContent: 'space-between',
+          alignItems: isMobile ? 'flex-start' : 'flex-end',
+          width: '100%',
+          gap: isMobile ? '1.25rem' : '0'
+        }}>
+          <div style={{
+            display: 'flex',
+            gap: isMobile ? '0.5rem' : '0.8rem',
+            flexWrap: 'wrap',
+            width: isMobile ? '100%' : '45%'
+          }}>
             {service.tags.map(tag => (
               <span key={tag} style={{
-                padding: '0.5rem 1.2rem',
+                padding: isMobile ? '0.35rem 0.9rem' : '0.5rem 1.2rem',
                 borderRadius: '9999px',
                 border: `2px solid ${service.color}`,
                 color: '#fff',
-                fontSize: '0.85rem',
+                fontSize: isMobile ? '0.7rem' : '0.85rem',
                 fontWeight: 600,
                 letterSpacing: '1px',
                 textTransform: 'uppercase',
@@ -173,7 +205,14 @@ const Card = ({ service, index, progress, range, targetScale }) => {
             ))}
           </div>
 
-          <p style={{ color: '#cccccc', fontSize: '1.1rem', lineHeight: 1.6, width: '50%', margin: 0, fontWeight: 500 }}>
+          <p style={{
+            color: '#cccccc',
+            fontSize: isMobile ? '0.9rem' : '1.1rem',
+            lineHeight: 1.6,
+            width: isMobile ? '100%' : '50%',
+            margin: 0,
+            fontWeight: 500
+          }}>
             {service.description}
           </p>
         </div>

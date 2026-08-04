@@ -44,7 +44,7 @@ export default function HeroSection() {
           height: '500px',
           background: 'radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, rgba(0,0,0,0) 70%)',
           zIndex: 0,
-          filter: 'blur(50px)'
+          filter: 'blur(50px)',
         }}
       />
       <motion.div

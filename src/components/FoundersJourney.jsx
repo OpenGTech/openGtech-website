@@ -29,6 +29,87 @@ const steps = [
   },
 ];
 
+function MobileStepCard({ step, i, setActiveStep }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-30% 0px -30% 0px" });
+
+  useEffect(() => {
+    if (isInView) {
+      setActiveStep(i);
+    }
+  }, [isInView, i, setActiveStep]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.3 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      style={{
+        padding: '2.5rem 1.5rem',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        position: 'relative',
+      }}
+    >
+      <p style={{
+        fontFamily: 'monospace',
+        fontSize: '0.7rem',
+        letterSpacing: '0.25em',
+        color: step.color,
+        marginBottom: '1rem',
+        opacity: 0.8,
+      }}>
+        {step.num}
+      </p>
+
+      <h3 style={{
+        fontSize: '1.5rem',
+        fontWeight: 800,
+        letterSpacing: '-0.03em',
+        lineHeight: 1.15,
+        marginBottom: '1rem',
+        color: '#fff',
+      }}>
+        {step.title}
+      </h3>
+
+      <p style={{
+        fontSize: '0.9rem',
+        lineHeight: 1.7,
+        color: 'rgba(255,255,255,0.4)',
+        fontWeight: 400,
+      }}>
+        {step.description}
+      </p>
+
+      <div style={{
+        width: '36px',
+        height: '2px',
+        background: step.color,
+        marginTop: '1.5rem',
+        borderRadius: '2px',
+        boxShadow: `0 0 16px ${step.color}66`,
+      }} />
+
+      {/* Subtle glow */}
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        right: '-10%',
+        width: '60vw',
+        height: '60vw',
+        borderRadius: '50%',
+        background: `radial-gradient(circle, ${step.color}10 0%, transparent 70%)`,
+        filter: 'blur(50px)',
+        transform: 'translateY(-50%)',
+        pointerEvents: 'none',
+        zIndex: -1,
+      }} />
+    </motion.div>
+  );
+}
+
 function StepCard({ step, i, setActiveStep }) {
   const ref = useRef(null);
   // Trigger when the center of this card hits the center of the viewport
@@ -120,6 +201,124 @@ function StepCard({ step, i, setActiveStep }) {
 
 export default function FoundersJourney() {
   const [activeStep, setActiveStep] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <section id="founders" style={{ position: 'relative', background: '#050505' }}>
+        {/* ── MOBILE: Sticky title header ── */}
+        <div style={{
+          position: 'sticky',
+          top: '75px',
+          zIndex: 20,
+          background: '#050505',
+          paddingTop: '1.5rem',
+          paddingBottom: '2rem',
+          paddingLeft: '1.5rem',
+          paddingRight: '1.5rem',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+        }}>
+          {/* Fade-out gradient at bottom edge for smooth blend */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-24px',
+            left: 0,
+            right: 0,
+            height: '24px',
+            background: 'linear-gradient(to bottom, #050505, transparent)',
+            pointerEvents: 'none',
+            zIndex: 21,
+          }} />
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p style={{
+              fontFamily: 'monospace',
+              fontSize: '0.6rem',
+              letterSpacing: '0.3em',
+              color: 'rgba(255,255,255,0.3)',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem',
+            }}>
+              The Founder&apos;s Path
+            </p>
+
+            <h2 style={{
+              fontSize: '2rem',
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
+              lineHeight: 1.1,
+              color: '#fff',
+              marginBottom: '0.75rem',
+            }}>
+              Your Journey, <span className="gradient-text">Engineered.</span>
+            </h2>
+
+            <p style={{
+              color: 'rgba(255,255,255,0.3)',
+              fontSize: '0.85rem',
+              lineHeight: 1.6,
+              maxWidth: '320px',
+            }}>
+              We know what founders need at the very beginning. From the first spark of an idea to a fully automated business.
+            </p>
+
+            {/* Step dots */}
+            <div style={{
+              display: 'flex',
+              gap: '8px',
+              marginTop: '1.25rem',
+              alignItems: 'center',
+            }}>
+              {steps.map((step, i) => (
+                <motion.div
+                  key={step.num}
+                  animate={{
+                    width: activeStep === i ? 28 : 6,
+                    backgroundColor: activeStep === i ? step.color : 'rgba(255,255,255,0.2)',
+                    opacity: activeStep === i ? 1 : 0.5,
+                  }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                  style={{
+                    height: '6px',
+                    borderRadius: '3px',
+                  }}
+                />
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── MOBILE: Scrolling step cards below ── */}
+        <div style={{
+          position: 'relative',
+          zIndex: 1,
+          paddingTop: '1rem',
+          paddingBottom: '4rem',
+        }}>
+          {steps.map((step, i) => (
+            <MobileStepCard
+              key={step.num}
+              step={step}
+              i={i}
+              setActiveStep={setActiveStep}
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="founders" style={{ position: 'relative', background: '#050505', maxWidth: '1400px', margin: '0 auto' }}>
