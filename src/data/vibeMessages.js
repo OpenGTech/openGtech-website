@@ -1,0 +1,20 @@
+export const vibeMessages = [
+  { emoji: '✨', text: 'OGs by nature. Icons by choice.' },
+  { emoji: '🔥', text: 'We understood the assignment.' },
+  { emoji: '💅', text: 'Less yap. More slay.' },
+  { emoji: '⚡', text: 'Built different. Coded better.' },
+  { emoji: '💅', text: 'Low-key iconic. High-key obsessed.' },
+  { emoji: '🚀', text: "We don't chase trends. We deploy them." },
+  { emoji: '💅', text: 'Serving looks. Shipping code.' },
+  { emoji: '💻', text: 'Cute faces. Serious builds.' },
+  { emoji: '☕', text: 'Born to innovate. Forced to debug.' },
+  { emoji: '👾', text: 'Main character energy. Backend logic.' },
+  { emoji: '🕶️', text: 'Too cool to be conventional.' },
+  { emoji: '🧢', text: 'No cap. Just clean code.' },
+  { emoji: '🎨', text: 'A little chaos. A lot of creativity.' },
+  { emoji: '🪄', text: 'We make pixels behave.' },
+  { emoji: '🧠', text: 'Delulu about ideas. Relentless about execution.' },
+  { emoji: '🫶', text: 'Your favourite tech people, probably.' },
+  { emoji: '📜', text: 'The lore is legendary.' },
+  { emoji: '🦆', text: 'Plot twist: we actually deliver.' }
+];

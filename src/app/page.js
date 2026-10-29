@@ -6,6 +6,7 @@ import ServicesSection from '@/components/ServicesSection';
 import HowWeShip from '@/components/HowWeShip';
 import LocalBusiness from '@/components/LocalBusiness';
 import ProductsShowcase from '@/components/ProductsShowcase';
+import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <ServicesSection />
       <LocalBusiness />
       <ProductsShowcase />
+      <ContactSection />
       <Footer />
     </main>
   );

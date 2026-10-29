@@ -38,7 +38,30 @@ export default function Footer() {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', color: 'var(--text-secondary)' }}>
               <li><Link href="#founders">For Founders</Link></li>
               <li><Link href="#products">Products</Link></li>
-              <li><Link href="#">Contact</Link></li>
+              <li><Link href="#contact">Contact</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style={{ fontWeight: 600, marginBottom: '1.5rem', fontSize: '1.2rem' }}>Contact</h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', color: 'var(--text-secondary)' }}>
+              <li>
+                <a
+                  href="mailto:contact@opengtech.studio"
+                  style={{
+                    color: 'var(--accent-color)',
+                    fontWeight: 500,
+                    textDecoration: 'none',
+                    wordBreak: 'break-all',
+                    transition: 'opacity 0.2s'
+                  }}
+                >
+                  contact@opengtech.studio
+                </a>
+              </li>
+              <li style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                Available for engineering, enterprise ERP deployments, and digital transformation.
+              </li>
             </ul>
           </div>
         </div>

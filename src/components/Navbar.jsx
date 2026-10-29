@@ -2,11 +2,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import VibeTicker from './VibeTicker';
 
 const navLinks = [
   { href: '#services', label: 'Services' },
   { href: '#founders', label: 'For Founders' },
   { href: '#products', label: 'Products' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
@@ -46,16 +48,20 @@ export default function Navbar() {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: isMobile ? '0 1.25rem' : '0 2rem',
-          background: 'rgba(5, 5, 5, 0.8)',
+          background: 'rgba(5, 5, 5, 0.85)',
           backdropFilter: 'blur(12px)',
-          zIndex: 100,
           borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-         
+          zIndex: 100,
         }}
       >
-        <Link href="/" style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>
-          <img src="/logo.png" alt="OpenGtech" style={{ height: isMobile ? '40px' : '50px' }} />
-        </Link>
+        {/* Brand logo + rotating vibes directly after logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+          <Link href="/" style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)', display: 'flex', alignItems: 'center' }}>
+            <img src="/logo.png" alt="OpenGtech" style={{ height: isMobile ? '40px' : '50px' }} />
+          </Link>
+
+          {!isMobile && <VibeTicker />}
+        </div>
 
         {/* Desktop nav links */}
         {!isMobile && (
@@ -65,7 +71,13 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <button className="btn btn-primary">Let&apos;s Build</button>
+            <a
+              href="mailto:contact@opengtech.studio"
+              className="btn btn-primary"
+              style={{ textDecoration: 'none' }}
+            >
+              Let&apos;s Build
+            </a>
           </div>
         )}
 
@@ -179,6 +191,10 @@ export default function Navbar() {
                 borderLeft: '1px solid rgba(255, 255, 255, 0.08)',
               }}
             >
+              <div style={{ marginBottom: '1.5rem', width: '100%' }}>
+                <VibeTicker showDivider={false} />
+              </div>
+
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -210,13 +226,21 @@ export default function Navbar() {
                 transition={{ delay: 0.4, duration: 0.4 }}
                 style={{ marginTop: '2rem' }}
               >
-                <button
+                <a
+                  href="mailto:contact@opengtech.studio"
                   className="btn btn-primary"
                   onClick={() => setIsOpen(false)}
-                  style={{ width: '100%', padding: '0.9rem 1.5rem', fontSize: '1rem' }}
+                  style={{
+                    width: '100%',
+                    padding: '0.9rem 1.5rem',
+                    fontSize: '1rem',
+                    display: 'block',
+                    textAlign: 'center',
+                    textDecoration: 'none'
+                  }}
                 >
                   Let&apos;s Build
-                </button>
+                </a>
               </motion.div>
 
               {/* Decorative glow */}

@@ -98,7 +98,7 @@ export default function TermsOfService() {
               <div>
                 <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: '#fff' }}>8. Contact Us</h2>
                 <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                  For any legal inquiries regarding these Terms of Service, please contact us at <strong>legal@opengtech.com</strong>.
+                  For any legal inquiries regarding these Terms of Service, please contact us at <a href="mailto:contact@opengtech.studio" style={{ color: 'var(--accent-color)' }}>contact@opengtech.studio</a>.
                 </p>
               </div>
             </div>

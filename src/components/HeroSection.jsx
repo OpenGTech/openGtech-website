@@ -160,22 +160,24 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div variants={itemVariants} style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <motion.button
+            <motion.a
+              href="#contact"
               whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(0, 210, 255, 0.4)' }}
               whileTap={{ scale: 0.95 }}
               className="btn btn-primary"
-              style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem', letterSpacing: '0.5px' }}
+              style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem', letterSpacing: '0.5px', textDecoration: 'none', display: 'inline-block' }}
             >
               Start Building
-            </motion.button>
-            <motion.button
+            </motion.a>
+            <motion.a
+              href="#services"
               whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.05)' }}
               whileTap={{ scale: 0.95 }}
               className="btn btn-outline"
-              style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem', letterSpacing: '0.5px' }}
+              style={{ padding: '1.2rem 2.5rem', fontSize: '1.1rem', letterSpacing: '0.5px', textDecoration: 'none', display: 'inline-block' }}
             >
               Explore Services
-            </motion.button>
+            </motion.a>
           </motion.div>
         </motion.div>
 

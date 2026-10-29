@@ -97,7 +97,7 @@ export default function PrivacyPolicy() {
               <div>
                 <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: '#fff' }}>7. Contact Us</h2>
                 <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                  If you have any questions or concerns regarding this Privacy Policy or our data practices, please reach out to us at <strong>contact@opengtech.com</strong>.
+                  If you have any questions or concerns regarding this Privacy Policy or our data practices, please reach out to us at <a href="mailto:contact@opengtech.studio" style={{ color: 'var(--accent-color)' }}>contact@opengtech.studio</a>.
                 </p>
               </div>
             </div>
